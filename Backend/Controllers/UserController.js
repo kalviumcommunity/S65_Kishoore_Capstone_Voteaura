@@ -45,6 +45,28 @@ const signup = async (req, res) => {
       console.error("Error in Signup:", error);
       res.status(500).json({ message: error.message });
     }
-  };
+  }
+const getUser = async (req, res) => {
+    const {district} = req.query;
+    try {
+      const UserDetail = await User.find({district: district});
+      res.status(200).json(UserDetail);
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
+  }
+  
+const getUserById = async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: 'Server error', error: error.message });
+    }
+  }
+  
 
-module.exports = {signup};
+module.exports = {signup, getUser, getUserById}
