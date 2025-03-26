@@ -67,6 +67,34 @@ const getUserById = async (req, res) => {
       res.status(500).json({ message: 'Server error', error: error.message });
     }
   }
+const updateUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, UDid, email, phone, district, proof, UDidimg, passportImage, status } = req.body;
+  
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      user.name = name || user.name;
+      user.UDid = UDid || user.UDid;
+      user.email = email || user.email;
+      user.phone = phone || user.phone;
+      user.district = district || user.district;
+      user.proof = proof || user.proof;
+      user.UDidimg = UDidimg || user.UDidimg;
+      user.passportImage = passportImage || user.passportImage;
+      user.status = status || user.status;
+  
+      await user.save();
+  
+      res.status(200).json({ message: "User updated successfully", user });
+    } catch (error) {
+      res.status(500).json({ error: "Error updating user", desc: error.message });
+    }
+  }
+  
   
 
-module.exports = {signup, getUser, getUserById}
+module.exports = {signup, getUser, getUserById, updateUser}
