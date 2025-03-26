@@ -1,0 +1,50 @@
+const User = require("../Models/User");
+
+const signup = async (req, res) => {
+    try {
+      const { name, UDid, email, phone, district } = req.body;
+      
+      const idProofFiles = req.files['proff'] || [];
+      const uDidImgFiles = req.files['UDidimg'] || [];
+      const passportImageFiles = req.files['passportImage'] || [];
+  
+      if (!name || !UDid || !email || !phone || !district) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+  
+      if (idProofFiles.length === 0 && uDidImgFiles.length === 0 && passportImageFiles.length === 0) {
+        return res.status(400).json({ message: "At least one image is required for Idproff, UDidimg, and passportImage" });
+      }
+  
+      const existingUser = await User.findOne({
+        $or: [{ UDid: UDid.trim() }, { email: email.trim() }],
+      });
+  
+      if (existingUser) {
+        return res.status(400).json({ message: 'User already signed up with this UDid or Email' });
+      }
+  
+      const imgUrlsIdProof = idProofFiles.map(file => `/uploads/${file.filename}`);
+      const imgUrlsUDidImg = uDidImgFiles.map(file => `/uploads/${file.filename}`);
+      const imgUrlsPassportImage = passportImageFiles.map(file => `/uploads/${file.filename}`);
+  
+      const newUser = new User({
+        name: name.trim(),
+        UDid: UDid.trim(),
+        email: email.trim(),
+        phone: phone,
+        district: district.trim(),
+        proof: imgUrlsIdProof,
+        UDidimg: imgUrlsUDidImg,
+        passportImage: imgUrlsPassportImage
+      });
+  
+      await newUser.save();
+      res.status(200).json({ message: "New User signed up successfully", newUser });
+    } catch (error) {
+      console.error("Error in Signup:", error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+module.exports = {signup};
