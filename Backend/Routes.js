@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {signup, getUser, getUserById }=require('./Controllers/UserController');
+const {signup, getUser, getUserById , updateUser}=require('./Controllers/UserController');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
@@ -11,5 +11,6 @@ router.post('/signup', upload.fields([
   ]), signup);
 router.get('/users/:id', getUserById);
 router.get('/users', getUser);
+router.put('/users/:id', updateUser);
 
 module.exports = router;
