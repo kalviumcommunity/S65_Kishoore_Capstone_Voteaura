@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 const express = require('express');
 const app = express();
 const connectDB = require('./Config/db');
@@ -6,7 +7,6 @@ const router = require('./Routes');
 const path = require('path');
 
 
-require('dotenv').config(); 
 
 app.use(express.json());
 app.use('/api', router);
