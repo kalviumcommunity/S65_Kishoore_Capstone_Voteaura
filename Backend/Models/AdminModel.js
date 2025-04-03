@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const AdminSchema = new mongoose.Schema({
     userid: {
@@ -15,4 +15,4 @@ const AdminSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Admin', AdminSchema);
+module.exports = mongoose.model('Admin', AdminSchema)
