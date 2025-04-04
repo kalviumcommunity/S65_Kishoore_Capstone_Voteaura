@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   passportImage: {
-    type: [String],
+    type: String,
     required: true,
   },
   status: {

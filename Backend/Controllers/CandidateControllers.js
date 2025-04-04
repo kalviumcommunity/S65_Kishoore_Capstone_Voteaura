@@ -2,7 +2,7 @@ const Candidate = require('../Models/CandidateModel')
 
 const addCandidate = async (req, res) => {
   try {
-    const { name, partyname } = req.body
+    const {name, partyname} = req.body
 
     const newCandidate = new Candidate({
       name,

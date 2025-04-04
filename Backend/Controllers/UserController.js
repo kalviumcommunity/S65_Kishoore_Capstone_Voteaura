@@ -28,18 +28,10 @@ const sendEmail = async (email, subject, text) => {
 
 const signup = async (req, res) => {
   try {
-    const { name, UDid, email, phone, district } = req.body
-    
-    const idProofFiles = req.files['proff'] || []
-    const uDidImgFiles = req.files['UDidimg'] || []
-    const passportImageFiles = req.files['passportImage'] || []
+    const { name, UDid, email, phone, district, proof, UDidimg, passportImage } = req.body
 
-    if (!name || !UDid || !email || !phone || !district) {
-      return res.status(400).json({ message: "All fields are required" })
-    }
-
-    if (idProofFiles.length === 0 && uDidImgFiles.length === 0 && passportImageFiles.length === 0) {
-      return res.status(400).json({ message: "At least one image is required for Idproff, UDidimg, and passportImage" })
+    if (!name || !UDid || !email || !phone || !district || !proof || !UDidimg || !passportImage) {
+      return res.status(400).json({ message: "All fields including images are required" })
     }
 
     const existingUser = await User.findOne({
@@ -50,19 +42,15 @@ const signup = async (req, res) => {
       return res.status(400).json({ message: 'User already signed up with this UDid or Email' })
     }
 
-    const imgUrlsIdProof = idProofFiles.map(file => `/uploads/${file.filename}`)
-    const imgUrlsUDidImg = uDidImgFiles.map(file => `/uploads/${file.filename}`)
-    const imgUrlsPassportImage = passportImageFiles.map(file => `/uploads/${file.filename}`)
-
     const newUser = new User({
       name: name.trim(),
       UDid: UDid.trim(),
       email: email.trim(),
-      phone: phone,
+      phone,
       district: district.trim(),
-      proof: imgUrlsIdProof,
-      UDidimg: imgUrlsUDidImg,
-      passportImage: imgUrlsPassportImage
+      proof,
+      UDidimg,
+      passportImage
     })
 
     await newUser.save()
@@ -74,9 +62,9 @@ const signup = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-  const {district} = req.query
+  const { district } = req.query
   try {
-    const UserDetail = await User.find({district: district})
+    const UserDetail = await User.find({ district: district })
     res.status(200).json(UserDetail)
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message })
