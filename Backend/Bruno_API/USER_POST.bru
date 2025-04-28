@@ -6,6 +6,26 @@ meta {
 
 post {
   url: http://localhost:5000/api/signup
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Jane Doe",
+    "UDid": "UDw399123",
+    "email": "janewe@example.com",
+    "phone": "9876543210",
+    "district": "Chennai",
+    "proof": [
+      "https://yourcdn.com/images/proof1.jpg",
+      "https://yourcdn.com/images/proof2.jpg"
+    ],
+    "UDidimg": [
+      "https://yourcdn.com/images/udid1.jpg",
+      "https://yourcdn.com/images/udid2.jpg"
+    ],
+    "passportImage": "https://yourcdn.com/images/passport.jpg"
+  }
+  
 }

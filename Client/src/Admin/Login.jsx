@@ -11,18 +11,18 @@
         setFormData({ ...formData, [name]: value });
     };
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
         const res = await axios.post('http://localhost:5000/api/login', {
             userid: formData.userid,
             password: formData.password,
             district: formData.district
-        });
+        })
+        console.log('Login successful:', res.data)
         alert('Login Successful');
-        console.log('Login response:', res.data);
         } catch (error) {
-        console.error('Login failed:', error.response ? error.response.data : error.message);
-        alert('Login failed. Please check your credentials.');
+        console.error('Login failed:', error.response ? error.response.data : error.message)
+        alert('Login failed. Please check your credentials.')
         }
     };
 

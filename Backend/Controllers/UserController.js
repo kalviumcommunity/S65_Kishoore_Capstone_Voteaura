@@ -2,72 +2,98 @@ const User = require('../Models/UserModel')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 const bcrypt = require('bcryptjs')
+const upload = require('../Config/multer')
 
-const generatePassword = () => {
-  return crypto.randomBytes(8).toString('hex')
-}
+let otpStore = {}
+
+const generatePassword = () => crypto.randomBytes(8).toString('hex')
 
 const sendEmail = async (email, subject, text) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'kishoore004@gmail.com',
-      pass: 'eiwd ovkk tifz zfqa'
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
     }
   })
 
   const mailOptions = {
-    from: 'kishoore004@gmail.com',
+    from: process.env.EMAIL_USER,
     to: email,
-    subject: subject,
-    text: text
+    subject,
+    text
   }
 
   await transporter.sendMail(mailOptions)
 }
 
+const sendOtp = async (req, res) => {
+  const { email } = req.body
+  try {
+    const otp = Math.floor(100000 + Math.random() * 900000).toString() // 6-digit OTP
+    otpStore[email] = otp
+    setTimeout(() => delete otpStore[email], 5 * 60 * 1000) // OTP expires after 5 minutes
+    await sendEmail(email, 'OTP for Verification', `Your OTP is ${otp}`)
+    res.status(200).json({ message: 'OTP sent successfully' })
+  } catch (error) {
+    console.error('Error sending OTP:', error)
+    res.status(500).json({ message: 'Failed to send OTP' })
+  }
+}
+
+const verifyOtp = async (req, res) => {
+  const { email, otp } = req.body
+  try {
+    if (otpStore[email] && otpStore[email] === otp) {
+      delete otpStore[email] // OTP verified, delete it
+      return res.status(200).json({ success: true, message: 'Email verified successfully' })
+    }
+    return res.status(400).json({ success: false, message: 'Invalid or expired OTP' })
+  } catch (error) {
+    console.error('Error verifying OTP:', error)
+    return res.status(500).json({ message: 'OTP verification failed' })
+  }
+}
+
 const signup = async (req, res) => {
   try {
-    const { name, UDid, email, phone, district, proof, UDidimg, passportImage } = req.body
+    const { name, UDid, email, phone, district, state } = req.body
+    const { proof, UDidimg, passportImage } = req.files
 
-    if (!name || !UDid || !email || !phone || !district || !proof || !UDidimg || !passportImage) {
-      return res.status(400).json({ message: "All fields including images are required" })
+    if (!name || !UDid || !email || !phone || !district || !state || !proof || !UDidimg || !passportImage) {
+      return res.status(400).json({ message: 'All fields including images are required' })
     }
-
-    const existingUser = await User.findOne({
-      $or: [{ UDid: UDid.trim() }, { email: email.trim() }]
-    })
-
+    const existingUser = await User.findOne({ UDid: UDid.trim() })
     if (existingUser) {
-      return res.status(400).json({ message: 'User already signed up with this UDid or Email' })
+      return res.status(400).json({ message: 'User already signed up with this UDid' })
     }
-
     const newUser = new User({
       name: name.trim(),
       UDid: UDid.trim(),
       email: email.trim(),
       phone,
       district: district.trim(),
-      proof,
-      UDidimg,
-      passportImage
+      state: state.trim(),
+      proof: proof[0].path,
+      UDidimg: UDidimg[0].path,
+      passportImage: passportImage[0].path
     })
 
     await newUser.save()
-    res.status(200).json({ message: "New User signed up successfully", newUser })
+    return res.status(200).json({ message: 'New User signed up successfully', newUser })
   } catch (error) {
-    console.error("Error in Signup:", error)
-    res.status(500).json({ message: error.message })
+    console.error('Error in Signup:', error)
+    return res.status(500).json({ message: error.message })
   }
 }
 
 const getUser = async (req, res) => {
   const { district } = req.query
   try {
-    const UserDetail = await User.find({ district: district })
+    const UserDetail = await User.find({ district })
     res.status(200).json(UserDetail)
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message })
+    res.status(500).json({ message: 'Server error', error: error.message })
   }
 }
 
@@ -156,4 +182,4 @@ const loginUser = async (req, res) => {
   }
 }
 
-module.exports = { signup, getUser, getUserById, updateUserStatus, rejectUser, loginUser }
+module.exports = { sendEmail, sendOtp, verifyOtp, signup, getUser, getUserById, updateUserStatus, rejectUser, loginUser }
