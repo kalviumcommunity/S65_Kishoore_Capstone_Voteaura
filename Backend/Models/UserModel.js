@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
   },
+  state:{
+        type: String,
+        required: true,
+  },
   proof: {
     type: [String],
     required: true,
@@ -34,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   passportImage: {
-    type: String,
+    type: [String],
     required: true,
   },
   status: {
@@ -44,5 +48,4 @@ const UserSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("User", UserSchema)
-
+module.exports = mongoose.model("User", UserSchema);
