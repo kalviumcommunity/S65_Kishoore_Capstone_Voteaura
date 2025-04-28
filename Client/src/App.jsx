@@ -5,6 +5,7 @@ import Login from './Admin/Login'
 import LandingPage from './Landing/Landing'
 import Signup from './User/Signup'
 import Info from './Navbar/Info'
+import AdminLandingPage from './Landing/AdminLanding';
 
 const App=()=>{
     return(
@@ -14,6 +15,7 @@ const App=()=>{
                 <Route path='/' element={<LandingPage/>}/>
                 <Route path='/signup' element={<Signup/>}/>
                 <Route path='/info' element={<Info/>}/>
+                <Route path='/admin' element={<AdminLandingPage/>}/>
 
             </Routes>
 

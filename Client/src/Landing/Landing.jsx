@@ -60,7 +60,7 @@ export default function LandingPage() {
         <h1 className="landing-logo">VoteAura</h1>
         <div className="landing-nav-links">
           <button className="landing-nav-button">Home</button>
-          <button className="landing-nav-button">Apply for UDID</button>
+          <button className="landing-nav-button" onClick={() => window.open("https://swavlambancard.gov.in/", "_blank")}>Apply for UDID</button>
           <button className="landing-nav-button" onClick={()=>navigate('/info')}>Get Access to Vote</button>
           <button className="landing-nav-button">Vote Now</button>
           <button className="landing-nav-button">Contact Us</button>
