@@ -30,9 +30,9 @@ const sendEmail = async (email, subject, text) => {
 const sendOtp = async (req, res) => {
   const { email } = req.body
   try {
-    const otp = Math.floor(100000 + Math.random() * 900000).toString() // 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString() 
     otpStore[email] = otp
-    setTimeout(() => delete otpStore[email], 5 * 60 * 1000) // OTP expires after 5 minutes
+    setTimeout(() => delete otpStore[email], 5 * 60 * 1000) 
     await sendEmail(email, 'OTP for Verification', `Your OTP is ${otp}`)
     res.status(200).json({ message: 'OTP sent successfully' })
   } catch (error) {
@@ -45,7 +45,7 @@ const verifyOtp = async (req, res) => {
   const { email, otp } = req.body
   try {
     if (otpStore[email] && otpStore[email] === otp) {
-      delete otpStore[email] // OTP verified, delete it
+      delete otpStore[email]
       return res.status(200).json({ success: true, message: 'Email verified successfully' })
     }
     return res.status(400).json({ success: false, message: 'Invalid or expired OTP' })

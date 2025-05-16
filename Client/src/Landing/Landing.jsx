@@ -7,7 +7,7 @@ export default function LandingPage() {
   const navigate = useNavigate()
   const ads = [
     {
-      img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg",
+      img: "/image/Vote.png",
       link: "https://example.com/vote-ad"
     },
     {
@@ -15,16 +15,16 @@ export default function LandingPage() {
       link: "https://example.com/ad2"
     },
     {
-      img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg",
+      img: "/image/Vote.png",
       link: "https://example.com/ad3"
     }
   ]
 
   const collaborators = [
-    { img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg", link: "https://example.com/collab1" },
-    { img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg", link: "https://example.com/collab2" },
-    { img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg", link: "https://example.com/collab3" },
-    { img: "https://static.vecteezy.com/system/resources/previews/001/225/844/original/vote-lettering-with-hand-gestures-vector.jpg", link: "https://example.com/collab4" }
+    { img: "/image/Vote.png", link: "https://example.com/collab1" },
+    { img: "/image/Vote.png", link: "https://example.com/collab2" },
+    { img: "/image/Vote.png", link: "https://example.com/collab3" },
+    { img: "/image/Vote.png", link: "https://example.com/collab4" }
   ]
 
   const news = [
@@ -58,7 +58,7 @@ export default function LandingPage() {
     <div className="landing-page">
       <nav className="landing-navbar">
         <h1 className="landing-logo">VoteAura</h1>
-        <div className="landing-nav-links">
+        <div className="landing-nav-links"> 
           <button className="landing-nav-button">Home</button>
           <button className="landing-nav-button" onClick={() => window.open("https://swavlambancard.gov.in/", "_blank")}>Apply for UDID</button>
           <button className="landing-nav-button" onClick={()=>navigate('/info')}>Get Access to Vote</button>
