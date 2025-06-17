@@ -19,4 +19,22 @@ const login = (req, res) => {
   }
 }
 
-module.exports = { login }
+const usualLogin=(req,res)=>{
+  const { userid, password, from } = req.body
+  if (
+    userid === process.env.ADMIN_USER_ID && password === process.env.ADMIN_PASSWORD
+  ) {
+    if (from === 'homepage') {
+      res.json({ success: true, redirectTo: '/admin' })
+    } else if (from === 'userpage') {
+      res.json({ success: true, redirectTo: '/' })
+    } else {
+      res.json({ success: true, redirectTo: '/query' }) 
+    }
+  } else {
+    res.status(401).json({ success: false, message: 'Invalid credentials' })
+  }    
+}
+
+
+module.exports = { login ,usualLogin}

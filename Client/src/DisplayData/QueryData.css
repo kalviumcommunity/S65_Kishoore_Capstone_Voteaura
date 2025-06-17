@@ -1,0 +1,85 @@
+.users-container {
+    width: 80%;
+    margin: 20px auto;
+    margin-top: 100px;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    padding: 70px;
+    font-size: 2rem;
+    color: #4d3a2a;
+    font-weight: bold;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff7ef;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(198, 156, 109, 0.1);
+    gap: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #4d3a2a;
+}
+
+.user-name,
+.user-udid {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.user-name {
+    margin-right: 0;
+}
+
+.user-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.user-actions button {
+    padding: 8px 15px;
+    background-color: #c69c6d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.user-actions button:hover:not(:disabled) {
+    background-color: #a97e50;
+}
+
+.user-actions button:disabled {
+    background-color: #ddd3c0;
+    color: #6f5d49;
+    cursor: not-allowed;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #c69c6d;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #4d3a2a;
+    background-color: #fff;
+    box-sizing: border-box;
+}

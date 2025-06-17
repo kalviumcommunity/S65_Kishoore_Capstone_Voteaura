@@ -1,22 +1,27 @@
 
 .landing-page {
     width: 100%;
-    min-height: 100vh;
+    min-height: 10vh;
     display: flex;
     flex-direction: column;
+    padding-top: 6rem;
+    
   }
   
-  .landing-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 3rem;
-    background: linear-gradient(to right, #c69c6d, #d2b48c);
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+.landing-navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 2rem 3rem;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
   
   .landing-logo {
     font-size: 2rem;

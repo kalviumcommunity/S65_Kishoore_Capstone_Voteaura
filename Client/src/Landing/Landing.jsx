@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react" 
 import "./Landing.css"
 import { useNavigate } from "react-router-dom"
-
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -12,19 +11,23 @@ export default function LandingPage() {
     },
     {
       img: "/image/UntitledBanner.png",
-      link: "https://example.com/ad2"
+      link: "https://swavlambancard.gov.in/"
     },
     {
-      img: "/image/Vote.png",
+      img: "/image/Hrithick web.jpg",
       link: "https://example.com/ad3"
     }
+
   ]
 
   const collaborators = [
-    { img: "/image/Vote.png", link: "https://example.com/collab1" },
-    { img: "/image/Vote.png", link: "https://example.com/collab2" },
-    { img: "/image/Vote.png", link: "https://example.com/collab3" },
-    { img: "/image/Vote.png", link: "https://example.com/collab4" }
+
+    { img: "/image/mygov.png", link: "https://www.mygov.in/" },
+    { img: "/image/institute.png", link: "https://niepid.nic.in/" },
+    { img: "/image/limbs.png", link: "https://alimco.in/" },
+    { img: "/image/Hrithick web.jpg", link: "https://example.com/collab3" },
+    { img: "/image/Signl.png", link: "https://islrtc.nic.in/" }
+
   ]
 
   const news = [
@@ -62,9 +65,9 @@ export default function LandingPage() {
           <button className="landing-nav-button">Home</button>
           <button className="landing-nav-button" onClick={() => window.open("https://swavlambancard.gov.in/", "_blank")}>Apply for UDID</button>
           <button className="landing-nav-button" onClick={()=>navigate('/info')}>Get Access to Vote</button>
-          <button className="landing-nav-button">Vote Now</button>
-          <button className="landing-nav-button">Contact Us</button>
-          <button className="landing-nav-button">Help</button>
+          <button className="landing-nav-button" onClick={()=>navigate('/votelogin')}>Vote Now</button>
+          <button className="landing-nav-button" onClick={()=>navigate('/query')}>Contact Us</button>
+          <button className="landing" onClick={()=>navigate('/messagedis')}>Election Update's</button>
         </div>
       </nav>
 
@@ -102,8 +105,9 @@ export default function LandingPage() {
 
       <footer className="landing-footer">
         <div className="landing-footer-section">
-          <h3>About</h3>
-          <p>- Know more about UDID</p>
+          <h3>Know about</h3>
+          <p>- how to vote through online</p>
+          <p>- how to apply for UDID</p>
           <p>- Schemes for Persons with Disabilities</p>
           <p>- About Department of Empowerment of Persons with Disabilities</p>
           <p>- Disibility schemesMedical Camps / Hospitals</p>

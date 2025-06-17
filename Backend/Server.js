@@ -6,13 +6,12 @@ const router = require('./Routes');
 const cors =require('cors')
 const path = require('path');
 
-
 require('dotenv').config(); 
 
 app.use(cors());
 app.use(express.json());
 app.use('/api', router);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 
 
@@ -24,7 +23,11 @@ app.get('/', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  connectDB();
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, async() => {
+  try{
+    await connectDB();
+    console.log(`Server running on port ${PORT}`);
+  }catch(error){
+    console.log(error)
+  }
 });

@@ -1,0 +1,61 @@
+.users-container {
+    width: 80%;
+    margin: 20px auto;
+    margin-top: 100px;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    padding: 70px;
+    font-size: 2rem;
+    color: #4d3a2a;
+    font-weight: bold;
+}
+
+.candidate-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff7ef;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(198, 156, 109, 0.1);
+    
+}
+
+.candidate-image,
+.party-image {
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.candidate-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #4d3a2a;
+    flex-grow: 1;
+}
+
+.candidate-name,
+.party-name {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.vote-count {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4d3a2a;
+    padding: 10px 15px;
+    background-color: #f1e3d1;
+    border-radius: 6px;
+    min-width: 100px;
+    text-align: center;
+}
