@@ -6,7 +6,7 @@ import './Query.css'
 export default function RaiseQuery() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
-    const [subject, setSubject] = useState('')
+    const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('')
 
     const handleSubmit = async (e) => {

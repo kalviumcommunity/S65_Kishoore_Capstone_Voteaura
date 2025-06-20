@@ -7,13 +7,12 @@
 
 .details-container {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 100px auto 20px;
   background-color: #fdf5ee;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(198, 156, 109, 0.2);
   border: 1px solid #ecd8c6;
-  margin-top: 100px;
 }
 
 .details-container h2 {
@@ -27,10 +26,6 @@
 .details-container p {
   font-size: 16px;
   margin: 12px 0;
-  color: #4d3a2a;
-}
-
-.details-container strong {
   color: #4d3a2a;
 }
 
@@ -59,16 +54,20 @@
   gap: 20px;
 }
 
-.accept-btn {
-  background-color: #c69c6d;
-  color: white;
-  border: none;
+.accept-btn,
+.reject-btn {
   padding: 12px 24px;
-  border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  color: white;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+.accept-btn {
+  background-color: #c69c6d;
 }
 
 .accept-btn:hover {
@@ -77,39 +76,12 @@
 
 .reject-btn {
   background-color: #4d3a2a;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
 }
 
 .reject-btn:hover {
   background-color: #3b2e22;
 }
 
-@media (max-width: 600px) {
-  .details-container {
-    padding: 20px;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .accept-btn,
-  .reject-btn {
-    width: 100%;
-  }
-
-  .image-section img {
-    max-width: 100%;
-  }
-}
 .rejection-box {
   margin-top: 30px;
   padding: 20px;
@@ -132,7 +104,7 @@
   resize: vertical;
   background-color: #fdf5ee;
   color: #4d3a2a;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
 }
 
 .send-reason-btn {
@@ -153,11 +125,22 @@
 }
 
 @media (max-width: 600px) {
-  .rejection-box textarea {
+  .details-container {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .accept-btn,
+  .reject-btn,
+  .send-reason-btn {
     width: 100%;
   }
 
-  .send-reason-btn {
-    width: 100%;
+  .image-section img {
+    max-width: 100%;
   }
 }

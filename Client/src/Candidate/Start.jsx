@@ -26,7 +26,7 @@ const StartElection = () => {
       return
     }
 
-    const updatedStates = [...electionStates, { state: selectedState, active: true,stopped:false }]
+    const updatedStates = [...electionStates, { state: selectedState, active: true, stopped: false }]
     setElectionStates(updatedStates)
     localStorage.setItem('electionStates', JSON.stringify(updatedStates))
     localStorage.setItem('electionState', selectedState)

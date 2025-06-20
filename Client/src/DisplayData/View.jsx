@@ -1,57 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import Navbar from "../Navbar/AdminNavbar";
-import "./View.css";
+import React, { useEffect, useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import axios from "axios"
+import Navbar from "../Navbar/AdminNavbar"
+import "./View.css"
 
 export default function CandidateDetailsPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [candidate, setCandidate] = useState(null);
-  const [showReasonBox, setShowReasonBox] = useState(false);
-  const [rejectionReason, setRejectionReason] = useState("");
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [candidate, setCandidate] = useState(null)
+  const [showReasonBox, setShowReasonBox] = useState(false)
+  const [rejectionReason, setRejectionReason] = useState("")
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/users/${id}`).then((res) => {
-      setCandidate(res.data);
-    });
-  }, [id]);
+    axios.get(`http://localhost:5000/api/users/${id}`)
+      .then(res => setCandidate(res.data))
+      .catch(err => console.error("Error fetching candidate:", err))
+  }, [id])
 
   const handleAccept = async () => {
     try {
       await axios.put(`http://localhost:5000/api/users/${id}/status`, {
-        status: "approved",
-      });
-      alert("Candidate Accepted");
-      navigate("/user");
+        status: "approved"
+      })
+      alert("Candidate Accepted")
+      navigate("/user")
     } catch (err) {
-      console.log(err);
+      console.error("Accept failed:", err)
     }
-  };
+  }
 
-  const handleRejectClick = () => {
-    setShowReasonBox(true);
-  };
+  const handleRejectClick = () => setShowReasonBox(true)
 
   const handleSendRejection = async () => {
     if (!rejectionReason.trim()) {
-      alert("Please enter a reason for rejection.");
-      return;
+      alert("Please enter a reason for rejection.")
+      return
     }
 
     try {
       await axios.post(`http://localhost:5000/api/users/${id}/reject`, {
-        reason: rejectionReason,
-      });
-      alert("Candidate Rejected and Notified");
-      navigate("/admin");
+        reason: rejectionReason
+      })
+      alert("Candidate Rejected and Notified")
+      navigate("/admin")
     } catch (err) {
-      console.error(err);
-      alert("Failed to reject candidate");
+      console.error("Rejection failed:", err)
+      alert("Failed to reject candidate")
     }
-  };
+  }
 
-  if (!candidate) return <div>Loading...</div>;
+  if (!candidate) return <div>Loading...</div>
 
   return (
     <div className="candidate-details-page">
@@ -98,7 +96,6 @@ export default function CandidateDetailsPage() {
               value={rejectionReason}
               onChange={(e) => setRejectionReason(e.target.value)}
               rows={4}
-              cols={50}
             />
             <button className="send-reason-btn" onClick={handleSendRejection}>
               Send Reason & Reject
@@ -107,5 +104,5 @@ export default function CandidateDetailsPage() {
         )}
       </div>
     </div>
-  );
+  )
 }

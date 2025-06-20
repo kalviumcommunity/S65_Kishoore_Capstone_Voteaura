@@ -11,44 +11,39 @@ export default function ViewDetails() {
         const userState = localStorage.getItem('userState')
         const res = await fetch(`http://localhost:5000/api/candidates?state=${userState}`)
         const data = await res.json()
-
         const candidatesWithVotes = data.candidates.map(candidate => ({
           ...candidate,
           votes: candidate.voteCount ?? 0
         }))
-
         setCandidates(candidatesWithVotes)
       } catch (error) {
         console.error('Failed to fetch candidates:', error)
       }
     }
-
     fetchCandidates()
   }, [])
 
   return (
-    <div className="users-container">
+    <div className="results-container">
       <Navbar />
-      <h2 className="header">Election Results</h2>
+      <h2 className="results-header">Election Results</h2>
       {candidates.map(candidate => (
-        <div key={candidate._id} className="candidate-card">
+        <div key={candidate._id} className="results-card">
           <img
             src={`http://localhost:5000/${candidate.profileimg}`}
             alt="Candidate"
-            className="candidate-image"
+            className="results-profile"
           />
-          <span className="candidate-name">{candidate.name}</span>
+          <span className="results-name">{candidate.name}</span>
           <img
             src={`http://localhost:5000/${candidate.partyimg}`}
             alt="Party"
-            className="party-image"
+            className="results-party-logo"
           />
-          <span className="party-name">{candidate.partyname}</span>
-          <div className="vote-count">Votes: {candidate.votes}</div>
+          <span className="results-party">{candidate.partyname}</span>
+          <div className="results-votes">Votes: {candidate.votes}</div>
         </div>
       ))}
     </div>
   )
 }
-
-
