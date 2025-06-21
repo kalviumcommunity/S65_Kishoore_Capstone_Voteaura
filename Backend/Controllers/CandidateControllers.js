@@ -2,13 +2,23 @@ const Candidate = require('../Models/CandidateModel')
 
 const addCandidate = async (req, res) => {
   try {
-    const {name, partyname} = req.body
+    const { name, partyname, state, district } = req.body
+    const { profileimg, partyimg } = req.files
+    if (!name || !partyname || !state || !district) {
+      return res.status(400).json({ error: 'Missing required fields in the form data' })
+    }
+
+    if (!profileimg || !partyimg || !profileimg[0] || !partyimg[0]) {
+      return res.status(400).json({ error: 'Missing profile or party image' })
+    }
 
     const newCandidate = new Candidate({
-      name,
-      profileimg: `/uploads/${req.files.profileimg[0].filename}`,
-      partyname,
-      partyimg: `/uploads/${req.files.partyimg[0].filename}`
+      name: name.trim(),
+      profileimg: profileimg[0].path,
+      partyname: partyname.trim(),
+      partyimg: partyimg[0].path,
+      state: state.trim(),
+      district: district.trim()
     })
 
     await newCandidate.save()
@@ -20,10 +30,12 @@ const addCandidate = async (req, res) => {
   }
 }
 
+
 const getAllCandidates = async (req, res) => {
+  const {state}=req.query
   try {
-    const candidates = await Candidate.find()
-    res.status(200).json(candidates)
+    const candidates = await Candidate.find({state})
+    res.status(200).json({candidates})
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message })
   }

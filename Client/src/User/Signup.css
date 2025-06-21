@@ -9,13 +9,14 @@
   max-width: 900px;
   margin: 20px auto;
   padding: 30px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
+  background: #fff8f0;
+  border: 1px solid #d8c3a5;
   border-radius: 8px;
+  margin-top: 150px;
 }
 
 .signup-container h2 {
-  background: navy;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
   color: white;
   padding: 10px 20px;
   margin-bottom: 30px;
@@ -35,6 +36,7 @@
 .form-group label {
   margin-bottom: 5px;
   font-weight: 600;
+  color: #5c4b3b;
 }
 
 input[type="text"],
@@ -42,15 +44,16 @@ input[type="email"],
 input[type="tel"],
 select {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #d8c3a5;
   border-radius: 4px;
+  background-color: #fffaf3;
 }
 
 .otp-button {
   margin-top: 10px;
   width: fit-content;
   padding: 8px 14px;
-  background-color: #2c3e50;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
   color: white;
   border: none;
   cursor: pointer;
@@ -65,16 +68,16 @@ select {
 .image-box {
   width: 140px;
   height: 140px;
-  border: 2px dashed #999;
+  border: 2px dashed #c2a57c;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555;
+  color: #8b6f47;
   cursor: pointer;
   border-radius: 6px;
   text-align: center;
   font-size: 14px;
-  background-color: #fff;
+  background-color: #fffaf3;
 }
 
 .image-box img {
@@ -86,7 +89,7 @@ select {
 
 .submit-button {
   padding: 12px;
-  background-color: navy;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
   color: white;
   font-weight: bold;
   border: none;
@@ -96,7 +99,7 @@ select {
 }
 
 .submit-button:hover {
-  background-color: #001f5c;
+  background-color: #b89058;
 }
 
 .otp-input {
@@ -104,8 +107,9 @@ select {
   padding: 8px;
   width: 200px;
   font-size: 16px;
-  border: 1px solid #aaa;
+  border: 1px solid #d8c3a5;
   border-radius: 4px;
+  background-color: #fffaf3;
   margin-right: 8px;
 }
 
@@ -117,12 +121,9 @@ select {
 
 .otp-verify-button {
   padding: 8px 12px;
-  background-color: #2b7bff;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
-
-

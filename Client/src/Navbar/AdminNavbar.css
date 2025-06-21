@@ -1,0 +1,52 @@
+
+.landing-page {
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6rem;
+    
+  }
+  
+.landing-navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 2rem 3rem;
+  background: linear-gradient(to right, #c69c6d, #d2b48c);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+  
+  .landing-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .landing-nav-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .landing-nav-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .landing-nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }

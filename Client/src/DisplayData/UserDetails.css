@@ -1,0 +1,66 @@
+.users-container {
+  width: 80%;
+  margin: 100px auto 20px;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  color: #4d3a2a;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff7ef;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(198, 156, 109, 0.1);
+  border-bottom: 1px solid #ddd;
+}
+
+.user-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #c69c6d;
+  margin-right: 20px;
+}
+
+.user-info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4d3a2a;
+}
+
+.user-name,
+.user-udid {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.user-actions button {
+  padding: 8px 15px;
+  background-color: #c69c6d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.user-actions button:hover:not(:disabled) {
+  background-color: #a97e50;
+}
+
+.user-actions button:disabled {
+  background-color: #ddd3c0;
+  color: #6f5d49;
+  cursor: not-allowed;
+}

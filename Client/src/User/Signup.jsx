@@ -3,6 +3,7 @@ import "./Signup.css"
 import axios from "axios"
 import Navbar from "../Navbar/Navbar"
 import { useNavigate } from "react-router-dom"
+import { stateDistrictData } from "../stateDistrict"
 
 export default function SignupPage() {
   const navigate = useNavigate()
@@ -16,6 +17,9 @@ export default function SignupPage() {
   const [timer, setTimer] = useState(0)
   const [otpSent, setOtpSent] = useState(false)
   const [buttonState, setButtonState] = useState("send")
+  const [selectedState, setSelectedState] = useState("")
+  const [districts, setDistricts] = useState([])
+  const [selectedDistrict, setSelectedDistrict] = useState("")
 
   useEffect(() => {
     let interval
@@ -47,12 +51,12 @@ export default function SignupPage() {
     if (!email) return alert("Please enter an email first")
     try {
       const res = await axios.post("http://localhost:5000/api/send-otp", { email })
-      alert(res.data.message,otpSent)
+      alert(res.data.message, otpSent)
       setOtpSent(true)
       setTimer(60)
       setButtonState("verify")
     } catch (err) {
-      alert("Failed to send OTP",err)
+      alert("Failed to send OTP", err)
     }
   }
 
@@ -61,7 +65,7 @@ export default function SignupPage() {
       const res = await axios.post("http://localhost:5000/api/verify-otp", { email, otp })
       if (res.data.success) {
         setEmailVerified(true)
-        setTimer(0)  // Stop showing the timer
+        setTimer(0)
         setButtonState("verified")
         alert("Email verified successfully")
       } else {
@@ -85,8 +89,8 @@ export default function SignupPage() {
     formData.append("phone", phone)
     formData.append("email", email)
     formData.append("UDid", e.target.udid.value)
-    formData.append("state", e.target.state.value)
-    formData.append("district", e.target.district.value)
+    formData.append("state", selectedState)
+    formData.append("district", selectedDistrict)
     idProofImages.forEach((img) => {
       if (img) formData.append("proof", img)
     })
@@ -102,7 +106,7 @@ export default function SignupPage() {
           "Content-Type": "multipart/form-data"
         }
       })
-      alert("Signup successful",res)
+      alert("Signup successful", res)
       navigate("/")
     } catch {
       alert("Signup failed")
@@ -196,18 +200,35 @@ export default function SignupPage() {
           </div>
           <div className="form-group">
             <label>Select State*</label>
-            <select name="state" required>
+            <select
+              name="state"
+              value={selectedState}
+              onChange={(e) => {
+                const state = e.target.value
+                setSelectedState(state)
+                setDistricts(stateDistrictData[state] || [])
+                setSelectedDistrict("")
+              }}
+              required
+            >
               <option value="">Select State</option>
-              <option value="state1">State 1</option>
-              <option value="state2">State 2</option>
+              {Object.keys(stateDistrictData).map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
             </select>
           </div>
           <div className="form-group">
             <label>Select District*</label>
-            <select name="district" required>
+            <select
+              name="district"
+              value={selectedDistrict}
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+              required
+            >
               <option value="">Select District</option>
-              <option value="district1">District 1</option>
-              <option value="district2">District 2</option>
+              {districts.map((district) => (
+                <option key={district} value={district}>{district}</option>
+              ))}
             </select>
           </div>
           <button type="submit" className="submit-button">Submit</button>
