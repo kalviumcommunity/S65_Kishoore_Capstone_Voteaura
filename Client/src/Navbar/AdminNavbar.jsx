@@ -15,7 +15,7 @@ export default function AdminLandingPage() {
             <button className="landing-nav-button" onClick={()=>navigate('/login')}>Give access to vote</button>
             <button className="landing-nav-button" onClick={()=>navigate('/candidate')}>Register Candidate's</button>
             <button className="landing-nav-button" onClick={()=>navigate('/getquery')}>Solve Query</button>
-            <button className="landing-nav-button" onClick={()=>navigate('/start')}>Start Election</button>
+            <button className="landing-nav-button" onClick={()=>navigate('/admin-login')}>Start Election</button>
             <button className="landing-nav-button" onClick={()=>navigate('/message')}>Post Information</button>
 
             </div>

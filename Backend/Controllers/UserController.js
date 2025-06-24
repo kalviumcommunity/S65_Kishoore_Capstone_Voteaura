@@ -1,4 +1,5 @@
 const User = require('../Models/UserModel')
+const ElectionState = require('../Models/StateModel')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 const bcrypt = require('bcryptjs')
@@ -165,41 +166,32 @@ const rejectUser = async (req, res) => {
     return res.status(500).json({ error: 'Error rejecting user', desc: error.message })
   }
 }
-
 const loginUser = async (req, res) => {
-  try {
-    const { UDid, password } = req.body
+  const { UDid, password } = req.body
 
+  try {
     const user = await User.findOne({ UDid })
-    if (!user || !user.password) {
-      return res.status(404).json({ message: 'Invalid Userid or Password' })
-    }
+
+    if (!user) return res.status(400).json({ message: 'User not found' })
+
+    if (user.hasVoted) return res.status(401).json({ message: 'Already logged in' })
 
     const isMatch = await bcrypt.compare(password, user.password)
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid Userid or Password' })
-    }
+    if (!isMatch) return res.status(400).json({ message: 'Incorrect password' })
 
-    if (user.status !== 'approved') {
-      return res.status(403).json({ message: 'Election is not active for your state. Voting is currently stopped.' })
-    }
+    const election = await ElectionState.findOne({ state: user.state, active: true })
+    if (!election) return res.status(403).json({ message: 'Election is not active for your state.' })
 
-    if (user.hasLoggedIn) {
-      return res.status(401).json({ message: 'Already logged in' })
-    }
-
-    user.hasLoggedIn = true
+    user.hasVoted = true
     await user.save()
 
-    return res.status(200).json({
-      message: 'Login successful',
-      user,
-      userState: user.state
-    })
+    res.status(200).json({ message: 'Login successful', userState: user.state })
   } catch (error) {
-    console.error('Error logging in user:', error)
-    return res.status(500).json({ error: 'Error logging in user', desc: error.message })
+    res.status(500).json({ message: 'Server error', error: error.message })
   }
 }
+
+
+
 
 module.exports = { sendEmail, sendOtp, verifyOtp, signup, getUser, getUserById, updateUserStatus, rejectUser, loginUser }

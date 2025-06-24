@@ -6,6 +6,7 @@ const {addCandidate,getAllCandidates,voteCandidate} = require('./Controllers/Can
 const {querymode,getquery,sendQueryResponse,marsolved}=require('./Controllers/QueryController')
 const { createMessage, getMessages, deleteMessage }=require('./Controllers/InfromationController')
 const {upload} = require('./Config/multer')
+const {startElection,stopElection,endAllElections,getAllElections}=require('./Controllers/StateControllers')
 
 router.post('/signup', upload.fields([
     { name: 'proof', maxCount: 2 },
@@ -54,5 +55,12 @@ router.get('/getmessage', getMessages)
 
 router.delete('/deletemessage/:id', deleteMessage)
 
+router.post('/start', startElection)
+
+router.post('/stop', stopElection)
+
+router.post('/end-all', endAllElections)
+
+router.get('/all', getAllElections)
 
 module.exports = router
