@@ -1,34 +1,35 @@
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import './AdminLogin.css'
+import Navbar from '../Navbar/AdminNavbar'
 
 const AdminLoginPage = () => {
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  const location = useLocation()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const from = location.state?.from || 'homepage'
       const res = await axios.post('http://localhost:5000/api/admin-login', {
-        userId,
-        password,
-        from
+        userid: userId,
+        password
       })
       if (res.data.success) {
-        navigate('/')
+        navigate('/start')
       }
     } catch (err) {
-      console.log('Login failed. Please check your credentials.',err)
+      console.log('Login failed. Please check your credentials.', err)
     }
   }
 
   return (
-    <div>
+    <div >
+      <Navbar />
+      <div className="admin-container">
+      <form onSubmit={handleSubmit} className="admin-form">
       <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="User ID"
@@ -43,6 +44,7 @@ const AdminLoginPage = () => {
         />
         <button type="submit">Login</button>
       </form>
+    </div>
     </div>
   )
 }

@@ -6,20 +6,19 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const ads = [
     { img: "/image/Vote.png", link: "https://example.com/vote-ad" },
-    { img: "/image/UntitledBanner.png", link: "https://swavlambancard.gov.in/" },
-    { img: "/image/Hrithick web.jpg", link: "https://example.com/ad3" }
+    { img: "/image/UntitledBanner.png", link: "https://swavlambancard.gov.in/" }
   ];
 
   const collaborators = [
     { img: "/image/mygov.png", link: "https://www.mygov.in/" },
     { img: "/image/institute.png", link: "https://niepid.nic.in/" },
     { img: "/image/limbs.png", link: "https://alimco.in/" },
-    { img: "/image/Hrithick web.jpg", link: "https://example.com/collab3" },
+    { img: "/image/logo.png", link: "https://ndfdc.nic.in/" },
     { img: "/image/Signl.png", link: "https://islrtc.nic.in/" }
   ];
 
   const news = [
-    {
+    { 
       img: "/image/News1.jpg",
       title: "Voting Rights Expanded for All",
       desc: "The Government has rolled out a new initiative to empower citizens with disabilities by making online voting accessible. Verified individuals who possess a Unique Disability ID (UDID) can now cast their votes digitally from the comfort of their homes. This step not only eliminates physical barriers but also ensures that every eligible citizen, regardless of mobility challenges, can exercise their democratic right with dignity and independence."

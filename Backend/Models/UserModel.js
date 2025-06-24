@@ -47,12 +47,10 @@ const UserSchema = new mongoose.Schema({
   password:{
     type:String
   },
-  hasLoggedIn: { 
+  hasVoted: { 
     type: Boolean, 
     default: false 
   }
-
-
 })
 
 module.exports = mongoose.model("User", UserSchema);
