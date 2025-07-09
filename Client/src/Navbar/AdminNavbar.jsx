@@ -11,7 +11,7 @@ export default function AdminLandingPage() {
         <nav className="landing-navbar">
             <h1 className="landing-logo">VoteAura</h1>
             <div className="landing-nav-links">
-            <button className="landing-nav-button" onClick={()=>navigate('/admin')}>Home</button>
+            <button className="landing-nav-button" onClick={()=>navigate('/adland')}>Home</button>
             <button className="landing-nav-button" onClick={()=>navigate('/login')}>Give access to vote</button>
             <button className="landing-nav-button" onClick={()=>navigate('/candidate')}>Register Candidate's</button>
             <button className="landing-nav-button" onClick={()=>navigate('/getquery')}>Solve Query</button>

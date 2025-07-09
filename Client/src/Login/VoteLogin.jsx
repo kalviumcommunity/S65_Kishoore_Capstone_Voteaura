@@ -12,7 +12,7 @@ const VoteLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/votenow', { UDid, password })
+      const res = await axios.post('https://s65-kishoore-capstone-voteaura.onrender.com/api/votenow', { UDid, password })
       const userState = res.data.userState
       localStorage.setItem('userState', userState)
       navigate('/candidatedis')
