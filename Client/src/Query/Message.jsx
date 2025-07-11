@@ -10,7 +10,7 @@ export default function RaiseQuery() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/getmessage')
+                const res = await fetch('https://s65-kishoore-capstone-voteaura.onrender.com/api/getmessage')
                 const data = await res.json()
                 setMessages(data)
             } catch (err) {
@@ -23,7 +23,7 @@ export default function RaiseQuery() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch('http://localhost:5000/api/createmessage', {
+            const res = await fetch('https://s65-kishoore-capstone-voteaura.onrender.com/api/createmessage', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ heading: heading.trim(), text: text.trim() })
@@ -43,7 +43,7 @@ export default function RaiseQuery() {
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/deletemessage/${id}`, { method: 'DELETE' })
+            const res = await fetch(`https://s65-kishoore-capstone-voteaura.onrender.com/api/deletemessage/${id}`, { method: 'DELETE' })
             if (res.ok) setMessages(messages.filter(msg => msg._id !== id))
             else alert('Failed to delete')
         } catch (err) {

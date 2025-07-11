@@ -166,9 +166,9 @@ const rejectUser = async (req, res) => {
     return res.status(500).json({ error: 'Error rejecting user', desc: error.message })
   }
 }
+
 const loginUser = async (req, res) => {
   const { UDid, password } = req.body
-
   try {
     const user = await User.findOne({ UDid })
 
@@ -190,8 +190,6 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message })
   }
 }
-
-
 
 
 module.exports = { sendEmail, sendOtp, verifyOtp, signup, getUser, getUserById, updateUserStatus, rejectUser, loginUser }

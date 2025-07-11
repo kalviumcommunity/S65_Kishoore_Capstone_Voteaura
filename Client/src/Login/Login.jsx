@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {userid,password,selectedState,selectedDistrict})
+      const response = await axios.post('https://s65-kishoore-capstone-voteaura.onrender.com/api/login', {userid,password,selectedState,selectedDistrict})
       localStorage.setItem('adminToken', response.data.token)
       setMessage(response.data.message)
       navigate('/user', { state: { district: selectedDistrict } })

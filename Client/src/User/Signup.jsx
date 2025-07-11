@@ -50,7 +50,7 @@ export default function SignupPage() {
   const sendOtp = async () => {
     if (!email) return alert("Please enter an email first")
     try {
-      const res = await axios.post("http://localhost:5000/api/send-otp", { email })
+      const res = await axios.post("https://s65-kishoore-capstone-voteaura.onrender.com/api/send-otp", { email })
       alert(res.data.message, otpSent)
       setOtpSent(true)
       setTimer(60)
@@ -62,7 +62,7 @@ export default function SignupPage() {
 
   const verifyOtp = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/verify-otp", { email, otp })
+      const res = await axios.post("https://s65-kishoore-capstone-voteaura.onrender.com/api/verify-otp", { email, otp })
       if (res.data.success) {
         setEmailVerified(true)
         setTimer(0)
@@ -101,7 +101,7 @@ export default function SignupPage() {
       formData.append("passportImage", profileImage)
     }
     try {
-      const res = await axios.post("http://localhost:5000/api/signup", formData, {
+      const res = await axios.post("https://s65-kishoore-capstone-voteaura.onrender.com/api/signup", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
