@@ -56,7 +56,8 @@ export default function SignupPage() {
       setTimer(60)
       setButtonState("verify")
     } catch (err) {
-      alert("Failed to send OTP", err)
+      alert("Failed to send OTP")
+      console.error(err)
     }
   }
 

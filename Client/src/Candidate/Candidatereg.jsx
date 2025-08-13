@@ -30,7 +30,7 @@ export default function AddCandidatePage() {
         body: formData
       })
       alert('Candidate added Successfully',res)
-      navigate('/admin')
+      navigate('/adland')
     } catch (err) {
       alert('Error in Adding Candidate',err)
     }

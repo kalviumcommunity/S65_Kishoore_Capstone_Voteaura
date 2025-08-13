@@ -9,13 +9,13 @@ const path = require('path');
 require('dotenv').config(); 
 
 app.use(cors({
-  origin: 'https://voteaura.onrender.com',
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true 
 }));
 app.use(express.json());
 app.use('/api', router);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-
 
 
 app.get('/', (req, res) => {
