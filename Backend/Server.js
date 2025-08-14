@@ -9,7 +9,7 @@ const path = require('path');
 require('dotenv').config(); 
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin:[ 'http://localhost:5173', 'https://voteaura.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true 
 }));

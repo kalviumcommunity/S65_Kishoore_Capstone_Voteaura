@@ -7,7 +7,7 @@ const upload = require('../Config/multer')
 
 let otpStore = {}
 
-const generatePassword = () => crypto.randomBytes(8).toString('hex')
+const generatePassword = () => crypto.randomBytes(2).toString('hex')
  
 const sendEmail = async (email, subject, text) => {
   const transporter = nodemailer.createTransport({
@@ -36,7 +36,7 @@ const sendOtp = async (req, res) => {
     setTimeout(() => delete otpStore[email], 5 * 60 * 1000) 
     await sendEmail(email, 'OTP for Verification', `Your OTP is ${otp}`)
     res.status(200).json({ message: 'OTP sent successfully' })
-  } catch (error) {
+  } catch (error) { 
     console.error('Error sending OTP:', error)
     res.status(500).json({ message: 'Failed to send OTP' })
   }
