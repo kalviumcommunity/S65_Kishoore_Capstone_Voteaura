@@ -1,43 +1,74 @@
-const ElectionState = require('../Models/StateModel')
+const ElectionState = require('../Models/StateModel');
 
-const startElection = async (req, res) => {
-  const { state } = req.body
+/**
+ * POST /api/elections/start
+ * Start an election for a given state.
+ */
+const startElection = async (req, res, next) => {
+  const { state } = req.body;
   try {
-    const existing = await ElectionState.findOne({ state })
-    if (existing) return res.status(400).json({ message: 'Election already started for this state' })
-    await ElectionState.create({ state, active: true, stopped: false })
-    res.status(200).json({ message: `Election started for ${state}` })
-  } catch (error) {
-    res.status(500).json({ message: 'Error starting election', error: error.message })
-  }
-}
+    const existing = await ElectionState.findOne({ state });
+    if (existing) {
+      return res.status(409).json({ message: 'Election already started for this state' });
+    }
 
-const stopElection = async (req, res) => {
-  const { state } = req.body
+    await ElectionState.create({ state, active: true, stopped: false });
+    res.status(201).json({ message: `Election started for ${state}` });
+  } catch (error) {
+    console.error('Error starting election:', error);
+    next(error);
+  }
+};
+
+/**
+ * POST /api/elections/stop
+ * Stop an ongoing election for a given state.
+ */
+const stopElection = async (req, res, next) => {
+  const { state } = req.body;
   try {
-    await ElectionState.findOneAndUpdate({ state }, { active: false, stopped: true })
-    res.status(200).json({ message: `Election stopped for ${state}` })
-  } catch (error) {
-    res.status(500).json({ message: 'Error stopping election', error: error.message })
-  }
-}
+    const election = await ElectionState.findOneAndUpdate(
+      { state },
+      { active: false, stopped: true },
+      { new: true }
+    );
 
-const endAllElections = async (req, res) => {
+    if (!election) {
+      return res.status(404).json({ message: `No active election found for ${state}` });
+    }
+
+    res.status(200).json({ message: `Election stopped for ${state}` });
+  } catch (error) {
+    console.error('Error stopping election:', error);
+    next(error);
+  }
+};
+
+/**
+ * DELETE /api/elections/end-all
+ * End all elections (removes all records).
+ */
+const endAllElections = async (req, res, next) => {
   try {
-    await ElectionState.deleteMany({})
-    res.status(200).json({ message: 'All elections ended' })
+    await ElectionState.deleteMany({});
+    res.status(200).json({ message: 'All elections ended' });
   } catch (error) {
-    res.status(500).json({ message: 'Error ending elections', error: error.message })
+    console.error('Error ending elections:', error);
+    next(error);
   }
-}
+};
 
-const getAllElections = async (req, res) => {
+/**
+ * GET /api/elections/
+ * Retrieve all election states.
+ */
+const getAllElections = async (req, res, next) => {
   try {
-    const states = await ElectionState.find()
-    res.status(200).json(states)
+    const states = await ElectionState.find();
+    res.status(200).json(states);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching states', error: error.message })
+    next(error);
   }
-}
+};
 
-module.exports = { startElection, stopElection, endAllElections, getAllElections }
+module.exports = { startElection, stopElection, endAllElections, getAllElections };

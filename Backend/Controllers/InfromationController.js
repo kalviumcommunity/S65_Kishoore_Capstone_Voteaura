@@ -1,32 +1,47 @@
-const Message = require('../Models/InformationModel')
+const Message = require('../Models/InformationModel');
 
-const createMessage = async (req, res) => {
+/**
+ * POST /api/information/
+ * Create a new information message (admin broadcast).
+ */
+const createMessage = async (req, res, next) => {
   try {
-    const { heading, text } = req.body
-    const newMessage = await Message.create({ heading, text })
-    res.status(201).json(newMessage)
+    const { heading, text } = req.body;
+    const newMessage = await Message.create({ heading, text });
+    res.status(201).json(newMessage);
   } catch (error) {
-    console.log('create message error',error)
-    res.status(500).json({ error: 'Failed to create message' })
+    console.error('Error creating message:', error);
+    next(error);
   }
-}
+};
 
-const getMessages = async (req, res) => {
+/**
+ * GET /api/information/
+ * Get all information messages.
+ */
+const getMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find()
-    res.json(messages)
+    const messages = await Message.find().sort({ _id: -1 });
+    res.status(200).json(messages);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch messages' })
+    next(error);
   }
-}
+};
 
-const deleteMessage = async (req, res) => {
+/**
+ * DELETE /api/information/:id
+ * Delete an information message by ID.
+ */
+const deleteMessage = async (req, res, next) => {
   try {
-    await Message.findByIdAndDelete(req.params.id)
-    res.json({ success: true })
+    const message = await Message.findByIdAndDelete(req.params.id);
+    if (!message) {
+      return res.status(404).json({ message: 'Message not found' });
+    }
+    res.status(200).json({ success: true, message: 'Message deleted' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete message' })
+    next(error);
   }
-}
+};
 
-module.exports = { createMessage, getMessages, deleteMessage }
+module.exports = { createMessage, getMessages, deleteMessage };

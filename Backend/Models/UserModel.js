@@ -13,6 +13,8 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    required: true,
+    unique: true,
     match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address'],
   },
   phone: {
@@ -39,19 +41,17 @@ const UserSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  status: {
-     type: String,
-      enum:['active','approved','stopped','rejected'],
-      default:'stopped' 
-    },
-  password:{
-    type:String
+  password: {
+    type: String,
+    // Set when admin approves the user (auto-generated)
   },
-  hasVoted: { 
-    type: Boolean, 
-    default: false 
-  }
-})
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending',
+  },
+}, {
+  timestamps: true, // Adds createdAt and updatedAt fields
+});
 
 module.exports = mongoose.model("User", UserSchema);
-

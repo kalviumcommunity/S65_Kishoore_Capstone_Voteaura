@@ -1,6 +1,23 @@
-.env
-
+# Dependencies
 node_modules/
 
+# Environment variables (contains secrets!)
+.env
+
+# Lock files (regenerated on install)
 package-lock.json
 
+# Uploaded files (user-generated content)
+uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
