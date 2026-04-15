@@ -1,61 +1,149 @@
-# VoteAura 
+# VoteAura
 
-## Idea Brief
-This project is an online e-ballot application designed exclusively for physically impaired individuals. Users are authenticated through their unique disability ID (UD-ID) and must submit all required details before voting. The application incorporates OTP-based mobile verification and utilizes Nodemailer for email communications to ensure secure access and notifications. Additionally, the system ensures a transparent, accessible, and hassle-free voting process, eliminating the need for physical presence and paperwork.
+## Overview
 
-## Key Features
-- **UD-ID Based Authentication** – Ensures only eligible users can vote.  
-- **OTP Mobile Verification** – Provides a secure login mechanism.  
-- **Email Notifications** – Uses Nodemailer to send confirmations and updates.  
-- **User-Friendly Voting Interface** – Accessible and inclusive UI/UX for all users.  
-- **Secure & Transparent Voting Process** – Ensures integrity and privacy.  
-- **Admin Approval System** – Admin can accept or reject user requests for voting.  
-- **Automated Credential Email** – Upon approval, users receive an email with their UD-ID and an auto-generated password.  
+VoteAura is a secure online voting system designed specifically for physically impaired individuals. The platform enables users to participate in elections using their Unique Disability ID (UD-ID) without the need for physical presence. It focuses on accessibility, security, and transparency throughout the voting process.
+
+The system includes user verification, admin approval, secure authentication, and real-time voting updates, making it suitable for real-world digital election use cases.
+
+---
+
+## Features
+
+### Authentication and Security
+
+* UD-ID based user authentication
+* OTP-based mobile verification
+* JWT-based authentication with role-based access (admin and user)
+* Password hashing and secure credential handling
+* Rate limiting, secure headers, and restricted CORS configuration
+* Input validation and centralized error handling
+* Secure file upload with type and size restrictions
+
+### Admin Functionality
+
+* Admin approval and rejection of user registration requests
+* Automated email notifications for approval or rejection
+* Credential generation and delivery via email
+* Management of candidates and election states
+
+### Voting System
+
+* Secure and simple voting interface
+* One user can vote only once
+* Real-time vote updates using Socket.io
+* Transparent vote tracking and counting
+
+### System Architecture
+
+* Modular structure using controllers, routes, middlewares, and utilities
+* Clean separation of concerns for scalability and maintainability
+* Centralized configuration for database, file upload, and sockets
+
+---
 
 ## Tech Stack
-- **Frontend:** React,CSS 
-- **Backend:** Node.js, Express.js  
-- **Database:** MongoDB  
-- **Authentication & Verification:** OTP-based mobile authentication, UD-ID validation  
-- **Email Service:** Nodemailer  
+
+Frontend:
+
+* React
+* CSS
+
+Backend:
+
+* Node.js
+* Express.js
+
+Database:
+
+* MongoDB
+
+Authentication and Security:
+
+* JSON Web Tokens (JWT)
+* OTP verification
+
+Other Tools and Libraries:
+
+* Socket.io (real-time updates)
+* Nodemailer (email service)
+* Multer (file uploads)
+* Helmet, CORS, Express Rate Limit (security middleware)
 
 ---
 
-## Project Phases
+## Project Structure
 
-### Phase 1: Project Setup & UI/UX Planning
-- Set up the **MERN stack** environment (MongoDB, Express.js, React, Node.js).  
-- Design wireframes for key pages (**Login, Voter Registration, Voting Page, Confirmation Page, Admin Dashboard, Admin Login, Add Candidate, etc.**).  
-- Plan the **UD-ID authentication and OTP verification** flow.  
-- Set up the **GitHub repository** and initialize the project.  
+Backend/
 
-### Phase 2: Backend Development & Security Implementation
-- Implement user authentication using **UD-ID validation**.  
-- Develop **OTP-based mobile verification system**.  
-- Set up **Nodemailer** for email notifications.  
-- Store **user and voting data securely** in MongoDB.  
-- Implement an **admin panel** to accept or reject voter registration requests.  
-- Configure an **automated email system** to send UD-ID and auto-generated passwords upon approval.  
-
-### Phase 3: Frontend Development & Voting System Integration
-- Build a **responsive and accessible UI** for voters.  
-- Implement the **voting mechanism** with a secure and user-friendly experience.  
-- Integrate **real-time status updates** for voting confirmation.  
-- Develop the **admin panel** with request approval/rejection functionality.  
-- Ensure **seamless interaction** between frontend and backend.  
-
-### Phase 4: Testing, Deployment & Final Enhancements
-- Conduct **unit and integration testing**.  
-- Debug issues and **optimize performance**.  
-- Deploy the application on a cloud platform (**e.g., Vercel, Heroku, etc.**).  
-- Gather **user feedback** and make necessary improvements.  
+* Config/ (database, multer, socket configuration)
+* Controllers/ (business logic)
+* Models/ (database schemas)
+* routes/ (API routes)
+* middlewares/ (authentication, validation, error handling)
+* Server.js (entry point)
 
 ---
 
-## Backend Deployed Link
+## API Overview
 
+User Routes:
+
+* Register user with details and document upload
+* Verify OTP
+* Login with credentials
+
+Admin Routes:
+
+* Approve or reject users
+* Manage candidates
+* Control election states
+
+Voting Routes:
+
+* Cast vote
+* Get vote results
+
+---
+
+## Deployment
+
+Backend:
 https://s65-kishoore-capstone-voteaura.onrender.com/
 
-## Frontend Deployed Link
-
+Frontend:
 https://voteaura.onrender.com/
+
+---
+
+## Workflow
+
+1. User registers using UD-ID and uploads required documents
+2. OTP verification is completed
+3. Admin reviews and approves or rejects the request
+4. Approved users receive login credentials via email
+5. User logs in and casts vote
+6. Votes are updated in real time
+
+---
+
+## Improvements Made
+
+* Refactored project into modular architecture (controllers, routes, middlewares)
+* Added JWT authentication and role-based access control
+* Implemented centralized error handling
+* Improved input validation across endpoints
+* Secured file uploads with size and type restrictions
+* Integrated Socket.io for real-time vote updates
+* Added security middleware including Helmet, CORS, and rate limiting
+* Fixed environment configuration issues and status codes
+
+---
+
+## Future Enhancements
+
+* Advanced analytics dashboard for admins
+* Multi-election support across different regions
+* Integration with OCR for document verification
+* Improved accessibility features for different types of disabilities
+
