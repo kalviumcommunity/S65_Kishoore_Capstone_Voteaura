@@ -18,6 +18,14 @@ const CandidateSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    district:{
+        type: String,
+        required: true,
+    },
+    state:{
+        type: String,
+        required: true,
+    },
     voteCount: {
         type: Number,
         default: 0

@@ -55,3 +55,7 @@ This project is an online e-ballot application designed exclusively for physical
 ## Backend Deployed Link
 
 https://s65-kishoore-capstone-voteaura.onrender.com/
+
+## Frontend Deployed Link
+
+https://voteaura.onrender.com/

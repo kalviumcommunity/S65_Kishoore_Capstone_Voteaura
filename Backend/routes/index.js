@@ -28,6 +28,8 @@ const { sendOtp, verifyOtp, signup, getUser, getUserById, updateUserStatus, reje
 const { login, usualLogin } = require('../Controllers/AdminControllers');
 const { addCandidate, getAllCandidates, voteCandidate } = require('../Controllers/CandidateControllers');
 const { querymode, getquery, sendQueryResponse, marsolved } = require('../Controllers/QueryController');
+const { createMessage, getMessages, deleteMessage } = require('../Controllers/InfromationController');
+const { startElection, stopElection, endAllElections, getAllElections } = require('../Controllers/StateControllers');
 const { upload } = require('../Config/multer');
 
 router.post('/signup', upload.fields([
@@ -54,5 +56,12 @@ router.post('/login', login);
 router.post('/votenow', loginUser);
 router.post('/users/:id/reject', rejectUser);
 router.post('/admin-login', usualLogin);
+router.post('/createmessage', createMessage);
+router.get('/getmessage', getMessages);
+router.delete('/deletemessage/:id', deleteMessage);
+router.post('/start', startElection);
+router.post('/stop', stopElection);
+router.post('/end-all', endAllElections);
+router.get('/all', getAllElections);
 
 module.exports = router;

@@ -1,0 +1,41 @@
+.admin-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #f4e4d4, #e8d3b9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form h2 {
+  text-align: center;
+  color: #333;
+}
+
+.admin-form input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.admin-form button {
+  padding: 12px;
+  background-color: #c69c6d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}

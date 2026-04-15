@@ -6,7 +6,7 @@ import './Query.css'
 export default function RaiseQuery() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
-    const [subject, setSubject] = useState('')
+    const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('')
 
     const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ export default function RaiseQuery() {
         }
 
         try {
-            const res = await fetch('http://localhost:5000/api/query', {
+            const res = await fetch('https://s65-kishoore-capstone-voteaura.onrender.com/api/query', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,6 +42,15 @@ export default function RaiseQuery() {
             <Navbar />
             <form onSubmit={handleSubmit} className="query-form">
                 <h2>Raise a Query</h2>
+
+                <div className="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Director</strong></p>
+                    <p>Department of Empowerment of Persons with Disabilities, Ministry of Social Justice & Empowerment</p>
+                    <p>Room No. 517, B-II Block, Antyodaya Bhawan,<br />CGO Complex, Lodhi Road, New Delhi - 110003 (India)</p>
+                    <p>📞 +91-11-2436 5019</p>
+                </div>
+
                 <label>Email:</label>
                 <input
                     type="email"
@@ -49,6 +58,7 @@ export default function RaiseQuery() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+
                 <label>Subject:</label>
                 <input
                     type="text"
@@ -56,6 +66,7 @@ export default function RaiseQuery() {
                     onChange={(e) => setSubject(e.target.value)}
                     required
                 />
+
                 <label>Message:</label>
                 <textarea
                     value={message}
@@ -63,7 +74,9 @@ export default function RaiseQuery() {
                     rows="6"
                     required
                 />
+
                 <button type="submit">Submit</button>
+                
             </form>
         </div>
     )

@@ -8,7 +8,8 @@ export default function ViewMessages() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/getmessage')
+        const res = await fetch('https://s65-kishoore-capstone-voteaura.onrender.com/api/getmessage')
+        console.log(res)
         const data = await res.json()
         setMessages(data)
       } catch (err) {
