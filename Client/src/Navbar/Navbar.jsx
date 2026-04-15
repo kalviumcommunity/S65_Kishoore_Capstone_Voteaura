@@ -15,6 +15,9 @@ export default function Navbar() {
         <button className="landing"onClick={()=>navigate('/signup')}>Signup</button>
         <button className="landing">Login</button>
         <button className="landing">Contact</button>
+        <button className="landing">Contact</button>
+
+
       </div>
     </nav>
   );

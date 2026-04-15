@@ -41,11 +41,17 @@ const UserSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  password: {
+    type: String,
+    // Set when admin approves the user (auto-generated)
+  },
   status: {
-     type: String,
-      default: 'pending' 
-    }
-
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending',
+  },
+}, {
+  timestamps: true, // Adds createdAt and updatedAt fields
 });
 
 module.exports = mongoose.model("User", UserSchema);

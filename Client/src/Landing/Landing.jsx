@@ -62,9 +62,9 @@ export default function LandingPage() {
           <button className="landing-nav-button">Home</button>
           <button className="landing-nav-button" onClick={() => window.open("https://swavlambancard.gov.in/", "_blank")}>Apply for UDID</button>
           <button className="landing-nav-button" onClick={()=>navigate('/info')}>Get Access to Vote</button>
-          <button className="landing-nav-button">Vote Now</button>
+          <button className="landing-nav-button" onClick={()=>navigate('/candidatedis')}>Vote Now</button>
           <button className="landing-nav-button">Contact Us</button>
-          <button className="landing-nav-button">Help</button>
+          <button className="landing-nav-button" onClick={()=>navigate('/query')}>Help</button>
         </div>
       </nav>
 
@@ -120,3 +120,10 @@ export default function LandingPage() {
     </div>
   )
 }
+
+
+
+
+
+
+
